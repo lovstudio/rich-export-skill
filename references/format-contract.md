@@ -7,9 +7,9 @@
 使用 CommonMark/Pandoc Markdown。图片使用标准 Markdown；视频、音频和嵌入内容使用原生 HTML。建议每个媒体都有标题、说明、替代文字和可访问链接。
 
 ```markdown
-![产品演示封面](assets/demo-poster.jpg)
+![产品演示封面](https://example.com/assets/demo-poster.jpg)
 
-<video controls src="assets/demo.mp4" poster="assets/demo-poster.jpg">
+<video controls src="https://example.com/assets/demo.mp4" poster="https://example.com/assets/demo-poster.jpg">
   产品演示视频。
 </video>
 

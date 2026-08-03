@@ -1,11 +1,32 @@
 ---
 name: lovstudio-rich-export
 description: 将一份面向用户的内容稳定导出为单文件 HTML、带 assets 的 HTML 文件夹、Markdown、DOCX 与 PDF，并按格式正确处理图片、音频、视频和嵌入式交互内容。用于“富媒体导出”“一键导出”“导出 html/pdf/docx/md”“离线网页”“交付包”“给产品接导出能力”等需求，以及需要为产品建立可复用内容导出管线时。
+license: MIT
+metadata:
+  author: lovstudio
+  version: 0.1.0
+  tags:
+    - export
+    - html
+    - pdf
+    - docx
+    - rich-media
 ---
 
 # 富媒体一键导出
 
 把内容先收敛为一个可审计的源，再针对每个交付格式生成其能忠实表达的版本。HTML 保留交互媒体；DOCX、PDF 和 Markdown 生成可编辑或可打印的静态投影，并为媒体保留封面、说明和原链接。
+
+## Triggers
+
+- 用户要求把一份内容或产品数据一键导出为 HTML、Markdown、DOCX、PDF、ZIP 或离线交付包。
+- 用户要求导出含图片、音频、视频、iframe、交互图表或媒体说明的内容，并需要针对不同格式正确处理。
+- 用户需要给 Web、桌面端或服务端产品接入可复用的多格式导出能力。
+
+### Do not activate when
+
+- 只需要编辑一个已有 DOCX、PDF 或网页中的局部内容，且不涉及多格式交付。
+- 只需要生成单张图片、单个幻灯片或一个视频文件；使用对应的媒体制作工作流。
 
 ## 先做内容边界
 
