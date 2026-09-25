@@ -6,7 +6,7 @@ depends_on:
   - lov-branding-consistency
 metadata:
   author: contributors
-  version: "0.2.1"
+  version: "0.2.2"
   tags:
     - export
     - html
@@ -80,14 +80,6 @@ python3 "$SKILL_DIR/scripts/export_rich.py" \
 - 现有 `lov-any2pdf`、`lov-any2docx` 仍适合中文长文的专门美术排版；本 Skill 负责多格式同源交付和富媒体降级策略。
 - 不将 SingleFile CLI 作为产品内置依赖：其开源仓库为 AGPL，且它更适合网页存档，不是多格式内容发布管线。
 - HTML 与打印/办公格式并非等价。交互图表、iframe 和媒体播放能力只在 HTML 保真；其他格式应把信息和访问路径交付完整，而不是伪装成可播放内容。
-
-## Runtime context
-
-运行前读取同目录 `skill.yaml`，由宿主的 `skill-runtime` 按“当前请求、项目上下文、个人配置、品牌 Profile、安全默认值”的顺序注入，只使用 manifest 声明的字段。
-
-- 缺少 `required: true` 字段时，按 `questions` 向用户提出一个聚焦问题；回答只用于本次运行，除非用户明确要求保存。
-- Profile 只用于公开品牌事实；个人配置只用于决策，不自动写入产物或源码。
-- 调试报错提供可复制的 `context_id`、字段路径和来源，不输出秘密、完整私人路径或原始内容。
 
 ## Runtime context (shared)
 
