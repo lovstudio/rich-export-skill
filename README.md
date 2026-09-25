@@ -1,6 +1,6 @@
 # 富文档导出 · Rich Export
 
-![Version](https://img.shields.io/badge/version-0.1.2-CC785C)
+![Version](https://img.shields.io/badge/version-0.2.1-CC785C)
 
 ![version](https://img.shields.io/badge/version-0.1.0-blue.svg)
 
