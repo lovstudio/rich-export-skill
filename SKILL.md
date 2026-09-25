@@ -2,9 +2,11 @@
 name: lov-rich-export
 description: 将一份面向用户的内容稳定导出为单文件 HTML、带 assets 的 HTML 文件夹、Markdown、DOCX 与 PDF，并按格式正确处理图片、音频、视频和嵌入式交互内容。用于“富媒体导出”“一键导出”“导出 html/pdf/docx/md”“离线网页”“交付包”“给产品接导出能力”等需求，以及需要为产品建立可复用内容导出管线时。
 license: MIT
+depends_on:
+  - lov-branding-consistency
 metadata:
   author: contributors
-  version: "0.2.0"
+  version: 0.1.2
   tags:
     - export
     - html
@@ -13,7 +15,7 @@ metadata:
     - rich-media
 ---
 
-# 富媒体一键导出
+# 富文档导出 · Rich Export
 
 把内容先收敛为一个可审计的源，再针对每个交付格式生成其能忠实表达的版本。HTML 保留交互媒体；DOCX、PDF 和 Markdown 生成可编辑或可打印的静态投影，并为媒体保留封面、说明和原链接。
 
@@ -79,6 +81,14 @@ python3 "$SKILL_DIR/scripts/export_rich.py" \
 - 不将 SingleFile CLI 作为产品内置依赖：其开源仓库为 AGPL，且它更适合网页存档，不是多格式内容发布管线。
 - HTML 与打印/办公格式并非等价。交互图表、iframe 和媒体播放能力只在 HTML 保真；其他格式应把信息和访问路径交付完整，而不是伪装成可播放内容。
 
+## Runtime context
+
+运行前读取同目录 `skill.yaml`，由宿主的 `skill-runtime` 按“当前请求、项目上下文、个人配置、品牌 Profile、安全默认值”的顺序注入，只使用 manifest 声明的字段。
+
+- 缺少 `required: true` 字段时，按 `questions` 向用户提出一个聚焦问题；回答只用于本次运行，除非用户明确要求保存。
+- Profile 只用于公开品牌事实；个人配置只用于决策，不自动写入产物或源码。
+- 调试报错提供可复制的 `context_id`、字段路径和来源，不输出秘密、完整私人路径或原始内容。
+
 ## Runtime context (shared)
 
 运行前读取本 Skill 包的 `skill.yaml`，由宿主提供 `skill-runtime/v1` 上下文。字段解析顺序为：当前请求、项目上下文、个人 Preferences、品牌 Profile、通用默认值。
@@ -86,13 +96,3 @@ python3 "$SKILL_DIR/scripts/export_rich.py" \
 - 只使用 Manifest 声明的字段；Profile 保存公开品牌事实，Preferences 保存个人工作偏好。
 - `required: true` 字段缺失时，按 Manifest 的问题配置向用户提出一个聚焦问题；用户明确同意后再保存回答。
 - 报错提供可复制的 `context_id`、字段路径与来源，诊断内容避开秘密、完整私人路径和原始配置。
-
-## 通用反馈闭环
-
-用户在 Skill 驱动任务中提出修改意见时，继续当前产物前必须执行：
-
-1. 先判断意见是 `task-specific`（仅本次）还是 `reusable`（可跨任务复用）。
-2. `task-specific` 只修改当前任务，不改 Skill。
-3. `reusable` 先确定作用域：领域规则先更新对应 canonical Skill；适用于所有 Skill 的规则先更新共享规范。
-4. 完成规则更新、版本、lint 与分发核验后，再把修改应用到当前任务。
-5. `reusable` 修改会使此前的“确认”“继续”“发吧”失效；完成当前产物修改和回读后必须停下，等待用户下一步指示，不自动进入发布、提交或其他外部写入。
